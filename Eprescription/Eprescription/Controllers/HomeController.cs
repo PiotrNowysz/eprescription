@@ -1,23 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Eprescription.Models;
 
 namespace Eprescription.Controllers
 {
     public class HomeController : Controller
     {
+
         public HomeController()
         {
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string filterString)
         {
-            return View();
+            return View(TestDatabase.Doctors);
+            
+        }
+
+        public IActionResult View(int indexOfDoctor)
+        {
+            return RedirectToAction("Index", "Prescription", new { indexOfDoctor = indexOfDoctor });
+        }
+
+        public IActionResult Delete(int indexOfDoctor)
+        {
+            return View(TestDatabase.Doctors);
         }
 
 

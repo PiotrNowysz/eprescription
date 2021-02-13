@@ -1,11 +1,12 @@
-﻿@model List<DoctorsViewModel>
+﻿@model PrescriptionViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = $"Prescription: {Model.Name}";
 }
-<form>
+<div>
+    Prescription's data:
+    @Model.Name
+</div>
 <input type="text" />
-</form>
-
 <div class="text-center">
     <table class="table">
         <thead>
@@ -22,15 +23,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var doctor in Model)
+            @foreach (var medicine in Model.Medicines)
             {
             <tr>
-                <th scope="row">@(Model.IndexOf(doctor)+1)</th>
-                <td>@doctor.Name</td>
+                <th scope="row">@(Model.Medicines.IndexOf(medicine)+1)</th>
+                <td>@medicine.Name</td>
                 <td>
-                    <a asp-area="" asp-controller="Home" asp-action="View" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">View</a>
-                    |
-                    <a asp-area="" asp-controller="Home" asp-action="Delete" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">Delete</a>
+                    <a asp-area="" asp-controller="Medicine" asp-action="View" asp-route-indexOfMedicine="@Model.Medicines.IndexOf(medicine)">Delete</a>
                 </td>
             </tr>
             }

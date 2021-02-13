@@ -6,9 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Eprescription.Controllers
 {
-    public class HomeController1 : Controller
+    public class MedicineController : Controller
     {
-        public IActionResult Index()
+        public MedicineController()
+        {
+
+        }
+        public IActionResult Index(int indexOfDoctor, int indexOfPrescription)
+        {
+            return View(TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.ElementAt(indexOfPrescription));
+        }
+
+        public IActionResult Delete(int indexOfMedicine)
         {
             return View();
         }
