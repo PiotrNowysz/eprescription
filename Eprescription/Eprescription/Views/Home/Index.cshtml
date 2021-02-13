@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<a class="btn btn-success" asp-controller="Home" asp-action="Add">Add doctor</a>
+
 <form asp-controller="Home" asp-action="Index">
     <input type="text" name="FilterString" />
     <button type="submit" class="btn btn-success">Filter</button>

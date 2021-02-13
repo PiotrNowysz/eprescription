@@ -7,7 +7,7 @@ namespace Eprescription
 {
     public static class TestDatabase
     {
-        public static List<DoctorsViewModel> Doctors => new List<DoctorsViewModel>
+        public static List<DoctorsViewModel> Doctors { get; set; } = new List<DoctorsViewModel>
         {
             new DoctorsViewModel
             {

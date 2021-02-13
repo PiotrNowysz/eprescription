@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = $"Prescription: {Model.Name}";
 }
+
+<a class="btn btn-success" asp-controller="Medicine" asp-action="Add">Add new medicine</a>
 <div>
     Prescription's data:
     @Model.Name

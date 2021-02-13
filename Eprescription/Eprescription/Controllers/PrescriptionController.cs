@@ -8,14 +8,14 @@ namespace Eprescription.Controllers
 {
     public class PrescriptionController : Controller
     {
-        private int IndextOfDoctor { get; set; }
+        private int IndexOfDoctor { get; set; }
         public PrescriptionController()
         {
 
         }
         public IActionResult Index(int indexOfDoctor, string filterString)
         {
-            IndextOfDoctor = indexOfDoctor;
+            IndexOfDoctor = indexOfDoctor;
             if (string.IsNullOrEmpty(filterString))
             {
                 return View(TestDatabase.Doctors.ElementAt(indexOfDoctor));
@@ -26,12 +26,25 @@ namespace Eprescription.Controllers
                 Name = TestDatabase.Doctors.ElementAt(indexOfDoctor).Name,
                 Prescriptions = TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.Where(x => x.Name.Contains(filterString)).ToList()
             });
-
-
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(PrescriptionViewModel prescriptionVm)
+        {
+            TestDatabase.Doctors.ElementAt(IndexOfDoctor)
+                .Prescriptions.Add(prescriptionVm);
+  
+            return RedirectToAction("Index");
+        }
+
         public IActionResult View(int indexOfPrescription)
         {
-            return RedirectToAction("Index", "Medicine", new { indexOfDoctor = IndextOfDoctor, indexOfPrescription = indexOfPrescription });
+            return RedirectToAction("Index", "Medicine", new { indexOfDoctor = IndexOfDoctor, indexOfPrescription = indexOfPrescription });
         }
 
         private int indexof(DoctorsViewModel doctorVM)
