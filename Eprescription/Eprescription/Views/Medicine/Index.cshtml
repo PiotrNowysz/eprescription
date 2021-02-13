@@ -6,7 +6,10 @@
     Prescription's data:
     @Model.Name
 </div>
-<input type="text" />
+<form asp-controller="Medicine" asp-action="Index">
+    <input type="text" name="FilterString" />
+    <button type="submit" class="btn btn-success">Filter</button>
+</form>
 <div class="text-center">
     <table class="table">
         <thead>

@@ -13,14 +13,25 @@ namespace Eprescription.Controllers
         {
 
         }
-        public IActionResult Index(int indexOfDoctor)
+        public IActionResult Index(int indexOfDoctor, string filterString)
         {
             IndextOfDoctor = indexOfDoctor;
-            return View(TestDatabase.Doctors.ElementAt(indexOfDoctor));
+            if (string.IsNullOrEmpty(filterString))
+            {
+                return View(TestDatabase.Doctors.ElementAt(indexOfDoctor));
+            }
+
+            return View(new DoctorsViewModel
+            {
+                Name = TestDatabase.Doctors.ElementAt(indexOfDoctor).Name,
+                Prescriptions = TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.Where(x => x.Name.Contains(filterString)).ToList()
+            });
+
+
         }
         public IActionResult View(int indexOfPrescription)
         {
-            return RedirectToAction("Index","Medicine", new {indexOfDoctor = IndextOfDoctor, indexOfPrescription = indexOfPrescription });
+            return RedirectToAction("Index", "Medicine", new { indexOfDoctor = IndextOfDoctor, indexOfPrescription = indexOfPrescription });
         }
 
         private int indexof(DoctorsViewModel doctorVM)

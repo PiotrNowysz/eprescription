@@ -12,8 +12,12 @@ namespace Eprescription.Controllers
 
         public IActionResult Index(string filterString)
         {
-            return View(TestDatabase.Doctors);
-            
+            if (string.IsNullOrEmpty(filterString))
+            {
+                return View(TestDatabase.Doctors);
+            }
+
+            return View(TestDatabase.Doctors.Where(x => x.Name.Contains(filterString)).ToList());
         }
 
         public IActionResult View(int indexOfDoctor)

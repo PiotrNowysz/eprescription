@@ -2,8 +2,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<form>
-<input type="text" />
+<form asp-controller="Home" asp-action="Index">
+    <input type="text" name="FilterString" />
+    <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
 <div class="text-center">
@@ -22,17 +23,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var doctor in Model)
+            @foreach (var doctor in Model)
             {
-            <tr>
-                <th scope="row">@(Model.IndexOf(doctor)+1)</th>
-                <td>@doctor.Name</td>
-                <td>
-                    <a asp-area="" asp-controller="Home" asp-action="View" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">View</a>
-                    |
-                    <a asp-area="" asp-controller="Home" asp-action="Delete" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <th scope="row">@(Model.IndexOf(doctor)+1)</th>
+                    <td>@doctor.Name</td>
+                    <td>
+                        <a asp-area="" asp-controller="Home" asp-action="View" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">View</a>
+                        |
+                        <a asp-area="" asp-controller="Home" asp-action="Delete" asp-route-indexOfDoctor="@Model.IndexOf(doctor)">Delete</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
