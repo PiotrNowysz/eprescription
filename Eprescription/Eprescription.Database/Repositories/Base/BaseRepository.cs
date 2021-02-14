@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Eprescription.Database
 {
-    abstract class BaseRepository<Entity> where Entity : class
+    abstract public class BaseRepository<Entity> where Entity : class
     {
         protected EprescriptionDbContext _dbContext;
-        protected abstract DbSet<Entity> DbSet { get; set; }
+        protected abstract DbSet<Entity> DbSet { get;}
         public BaseRepository(EprescriptionDbContext dbContext)
         {
             _dbContext = dbContext;
