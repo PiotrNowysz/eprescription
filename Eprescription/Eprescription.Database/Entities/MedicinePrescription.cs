@@ -1,4 +1,4 @@
-﻿namespace Eprescription
+﻿namespace Eprescription.Database
 {
     public class MedicinePrescription
     {

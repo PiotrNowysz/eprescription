@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Eprescription
+namespace Eprescription.Database
 {
-    public class Medicine
+    public class Medicine : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string ProducentName { get; set; }
         public string Composition { get; set; }

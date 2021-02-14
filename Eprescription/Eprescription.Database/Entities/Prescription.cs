@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Eprescription
+namespace Eprescription.Database
 {
-    public class Prescription
+    public class Prescription : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime CreatingDate { get; set; }
         public DateTime ExpirationDate { get; set; }

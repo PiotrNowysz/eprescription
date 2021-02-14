@@ -1,6 +1,6 @@
 ﻿namespace Eprescription.Database
 {
-    public interface IDoctorRepository
+    public interface IDoctorRepository : IRepository<Doctor>
     {
     }
 }

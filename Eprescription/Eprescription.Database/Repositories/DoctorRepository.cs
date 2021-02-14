@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Eprescription.Database
 {
@@ -8,6 +10,10 @@ namespace Eprescription.Database
 
         public DoctorRepository(EprescriptionDbContext dbContext) : base(dbContext)
         {
+        }
+        public override IEnumerable<Doctor> GetAll()
+        {
+            return DbSet.Include(x=> x.Prescriptions).Select(x => x);
         }
     }
 }
