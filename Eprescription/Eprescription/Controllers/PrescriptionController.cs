@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Eprescription.Controllers
 {
@@ -38,7 +36,7 @@ namespace Eprescription.Controllers
         {
             TestDatabase.Doctors.ElementAt(IndexOfDoctor)
                 .Prescriptions.Add(prescriptionVm);
-  
+
             return RedirectToAction("Index");
         }
 
