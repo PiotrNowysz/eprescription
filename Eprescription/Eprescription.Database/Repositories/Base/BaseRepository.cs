@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace Eprescription.Database
@@ -26,4 +24,4 @@ namespace Eprescription.Database
         }
     }
 }
-}
+
