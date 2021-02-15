@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Eprescription.Core
 {
@@ -13,6 +14,7 @@ namespace Eprescription.Core
         public int ActivationCode { get; set; }
         public string PatientEmail { get; set; }
         public IList<MedicinePrescriptionDto> MedicinePrescriptions { get; set; }
+        [Required]
         public DoctorDto Doctor { get; set; }
     }
 }

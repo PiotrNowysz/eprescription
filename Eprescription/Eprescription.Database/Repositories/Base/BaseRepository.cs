@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Eprescription.Database
 {
-    abstract public class BaseRepository<Entity> where Entity : BaseEntity
+    public abstract class BaseRepository<Entity> where Entity : BaseEntity
     {
         protected EprescriptionDbContext _dbContext;
         protected abstract DbSet<Entity> DbSet { get;}

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Eprescription.Database;
 using Microsoft.EntityFrameworkCore;
+using Eprescription.Core;
 
 namespace Eprescription
 {
@@ -31,6 +32,12 @@ namespace Eprescription
             services.AddTransient<IDoctorRepository, DoctorRepository>();
             services.AddTransient<IPrescriptionRepository, PrescriptionRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
+
+            services.AddTransient<IDoctorManager, DoctorManager>();
+            services.AddTransient<IPrescriptionManager, PrescriptionManager>();
+            services.AddTransient<MedicineManager>();
+            services.AddScoped(typeof(IBaseDtoMapper<,>), typeof(BaseDtoMapper<,>));
+
 
         }
 

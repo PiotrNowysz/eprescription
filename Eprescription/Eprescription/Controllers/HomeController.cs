@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Eprescription.Core;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace Eprescription.Controllers
@@ -8,10 +9,12 @@ namespace Eprescription.Controllers
 
         public HomeController()
         {
+
         }
 
         public IActionResult Index(string filterString)
         {
+
             if (string.IsNullOrEmpty(filterString))
             {
                 return View(TestDatabase.Doctors);

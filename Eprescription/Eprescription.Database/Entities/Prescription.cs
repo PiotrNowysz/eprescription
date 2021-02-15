@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eprescription.Database
@@ -16,6 +17,7 @@ namespace Eprescription.Database
 
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
+        [Required]
         public virtual Doctor Doctor { get; set; }
     }
 }
