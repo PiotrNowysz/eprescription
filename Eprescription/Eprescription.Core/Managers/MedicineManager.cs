@@ -7,7 +7,9 @@ namespace Eprescription.Core
 {
     public class MedicineManager : BaseManager<Medicine, MedicineDto>
     {
-        public MedicineManager(IRepository<Medicine> repository, IBaseDtoMapper<Medicine, MedicineDto> baseMapper) : base(repository, baseMapper)
+        public MedicineManager(IRepository<Medicine> repository,
+            IBaseDtoMapper<Medicine,
+            MedicineDto> baseMapper) : base(repository, baseMapper)
         {
 
         }

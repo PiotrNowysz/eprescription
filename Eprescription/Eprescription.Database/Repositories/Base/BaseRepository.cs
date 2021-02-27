@@ -7,7 +7,8 @@ namespace Eprescription.Database
     public abstract class BaseRepository<Entity> where Entity : BaseEntity
     {
         protected EprescriptionDbContext _dbContext;
-        protected abstract DbSet<Entity> DbSet { get;}
+        protected abstract DbSet<Entity> DbSet { get; }
+
         public BaseRepository(EprescriptionDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -17,6 +18,7 @@ namespace Eprescription.Database
         {
             return DbSet.Select(x => x);
         }
+
         public bool AddNew(Entity entity)
         {
             DbSet.Add(entity);
@@ -34,9 +36,10 @@ namespace Eprescription.Database
             }
             return false;
         }
+
         public bool SaveChanges()
         {
-           return  _dbContext.SaveChanges() > 0;
+            return _dbContext.SaveChanges() > 0;
         }
     }
 }

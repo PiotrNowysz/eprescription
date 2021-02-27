@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Eprescription.Core
 {
-    public abstract class BaseDtoMapper<Entity, Dto> : IBaseDtoMapper<Entity, Dto>
+    public abstract class BaseDtoMapper<Entity, Dto>
     {
         private IMapper _mapper;
 
@@ -30,6 +30,8 @@ namespace Eprescription.Core
 
         public IEnumerable<Entity> Map(IEnumerable<Dto> entityDtos)
             => _mapper.Map<IEnumerable<Entity>>(entityDtos);
+
+
         #endregion
 
     }

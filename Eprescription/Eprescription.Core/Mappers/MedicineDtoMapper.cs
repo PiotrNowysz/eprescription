@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Eprescription.Core
 {
-    public class MedicineDtoMapper
+    public class MedicineDtoMapper: IMedicineDtoMapper
     {
         private IMapper _mapper;
 
-        public MedicineDtoMapper()
+        public MedicineDtoMapper() 
         {
             _mapper = new MapperConfiguration(config =>
             {
