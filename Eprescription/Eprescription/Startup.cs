@@ -29,6 +29,7 @@ namespace Eprescription
             services.AddControllersWithViews();
 
             services.AddDbContext<EprescriptionDbContext>(options => options.UseSqlServer("Server=.;Database=EprescriptionDbContext;Trusted_Connection=True;"));
+            
             services.AddTransient<IDoctorRepository, DoctorRepository>();
             services.AddTransient<IPrescriptionRepository, PrescriptionRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
@@ -38,11 +39,10 @@ namespace Eprescription
             services.AddTransient<IPrescriptionDtoMapper, PrescriptionDtoMapper>();
             services.AddTransient<IMedicinePrescriptionMapper, MedicinePrescriptionMapper>();
 
-            //services.AddTransient<IDoctorManager, DoctorManager>();
-            //services.AddTransient<IPrescriptionManager, PrescriptionManager>();
-            //services.AddTransient<MedicineManager>();
-            //services.AddScoped(typeof(IBaseDtoMapper<,>), typeof(BaseDtoMapper<,>));
-            //services.AddScoped(typeof(IBaseManager<>), typeof(BaseManager<,>));
+            services.AddTransient<IDoctorManager, DoctorManager>();
+            services.AddTransient<IPrescriptionManager, PrescriptionManager>();
+            services.AddTransient<IMedicineManager, MedicineManager>();
+
 
 
         }

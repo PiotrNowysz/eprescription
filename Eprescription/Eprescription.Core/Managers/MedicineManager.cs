@@ -5,13 +5,26 @@ using System.Text;
 
 namespace Eprescription.Core
 {
-    public class MedicineManager : BaseManager<Medicine, MedicineDto>
+    public class MedicineManager : IMedicineManager
     {
-        public MedicineManager(IRepository<Medicine> repository,
-            IBaseDtoMapper<Medicine,
-            MedicineDto> baseMapper) : base(repository, baseMapper)
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IMedicineDtoMapper _medicineMapper;
+        public MedicineManager(IMedicineRepository repository, IMedicineDtoMapper mapper)
         {
+            _medicineRepository = repository;
+            _medicineMapper = mapper;
 
+        }
+        public bool AddNew(MedicineDto medicineDto)
+        {
+            var entity = _medicineMapper.Map(medicineDto);
+            return _medicineRepository.AddNew(entity);
+        }
+
+        public bool Delete(MedicineDto medicineDto)
+        {
+            var entity = _medicineMapper.Map(medicineDto);
+            return _medicineRepository.Delete(entity);
         }
     }
 }

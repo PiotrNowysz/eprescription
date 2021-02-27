@@ -4,16 +4,16 @@ using System.Linq;
 
 namespace Eprescription.Core
 {
-    public class DoctorManager : BaseManager<Doctor, DoctorDto>, IDoctorManager
+    public class DoctorManager : IDoctorManager
     {
         private readonly IDoctorRepository _doctorRepository;
-        private readonly DoctorDtoMapper _doctorMapper;
+        private readonly IDoctorDtoMapper _doctorMapper;
         private readonly IPrescriptionRepository _prescriptionRepository;
-        private readonly PrescriptionDtoMapper _prescriptionMapper;
+        private readonly IPrescriptionDtoMapper _prescriptionMapper;
 
-        public DoctorManager(IDoctorRepository doctorRepository, DoctorDtoMapper doctorMapper,
+        public DoctorManager(IDoctorRepository doctorRepository, IDoctorDtoMapper doctorMapper,
             IPrescriptionRepository prescriptionRepository,
-            PrescriptionDtoMapper prescriptionMapper, IRepository<Doctor> repository, IBaseDtoMapper<Doctor, DoctorDto> baseMapper) : base(repository, baseMapper)
+            IPrescriptionDtoMapper prescriptionMapper)
         {
             _doctorRepository = doctorRepository;
             _doctorMapper = doctorMapper;
@@ -41,6 +41,17 @@ namespace Eprescription.Core
                 prescriptionEntities = prescriptionEntities.Where(x => x.Name.Contains(filterString));
             }
             return _prescriptionMapper.Map(prescriptionEntities);
+        }
+        public bool AddNew(DoctorDto doctorDto)
+        {
+            var entity = _doctorMapper.Map(doctorDto);
+            return _doctorRepository.AddNew(entity);
+        }
+
+        public bool Delete(DoctorDto doctorDto)
+        {
+            var entity = _doctorMapper.Map(doctorDto);
+            return _doctorRepository.Delete(entity);
         }
 
     }
