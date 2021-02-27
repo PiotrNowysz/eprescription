@@ -4,16 +4,17 @@ using System.Linq;
 
 namespace Eprescription.Core
 {
-    public class DoctorManager : IDoctorManager
+    public class DoctorManager : BaseManager<Doctor, DoctorDto>, IDoctorManager
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDoctorDtoMapper _doctorMapper;
         private readonly IPrescriptionRepository _prescriptionRepository;
         private readonly IPrescriptionDtoMapper _prescriptionMapper;
 
-        public DoctorManager(IDoctorRepository doctorRepository, IDoctorDtoMapper doctorMapper,
+        public DoctorManager(IDoctorRepository doctorRepository,
+            IDoctorDtoMapper doctorMapper,
             IPrescriptionRepository prescriptionRepository,
-            IPrescriptionDtoMapper prescriptionMapper)
+            IPrescriptionDtoMapper prescriptionMapper) : base(doctorMapper, doctorRepository)
         {
             _doctorRepository = doctorRepository;
             _doctorMapper = doctorMapper;
@@ -42,17 +43,17 @@ namespace Eprescription.Core
             }
             return _prescriptionMapper.Map(prescriptionEntities);
         }
-        public bool AddNew(DoctorDto doctorDto)
-        {
-            var entity = _doctorMapper.Map(doctorDto);
-            return _doctorRepository.AddNew(entity);
-        }
+        //public bool AddNew(DoctorDto doctorDto)
+        //{
+        //    var entity = _doctorMapper.Map(doctorDto);
+        //    return _doctorRepository.AddNew(entity);
+        //}
 
-        public bool Delete(DoctorDto doctorDto)
-        {
-            var entity = _doctorMapper.Map(doctorDto);
-            return _doctorRepository.Delete(entity);
-        }
+        //public bool Delete(DoctorDto doctorDto)
+        //{
+        //    var entity = _doctorMapper.Map(doctorDto);
+        //    return _doctorRepository.Delete(entity);
+        //}
 
     }
 }

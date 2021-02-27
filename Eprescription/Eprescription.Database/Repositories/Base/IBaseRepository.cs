@@ -2,7 +2,7 @@
 
 namespace Eprescription.Database
 {
-    public interface IRepository<Entity> where Entity : BaseEntity
+    public interface IBaseRepository<Entity> where Entity : BaseEntity
     {
         public IEnumerable<Entity> GetAll();
         public bool AddNew(Entity entity);

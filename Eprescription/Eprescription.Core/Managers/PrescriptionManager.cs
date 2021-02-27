@@ -4,20 +4,17 @@ using System.Linq;
 
 namespace Eprescription.Core
 {
-    public class PrescriptionManager : IPrescriptionManager
+    public class PrescriptionManager : BaseManager<Prescription, PrescriptionDto>, IPrescriptionManager
     {
 
         private readonly IPrescriptionRepository _prescriptionRepository;
-        private readonly IPrescriptionDtoMapper _prescriptionMapper;
-        private readonly IMedicineRepository _medicineRepository;
         private readonly IMedicineDtoMapper _medicineMapper;
 
-        public PrescriptionManager(IPrescriptionRepository prescriptionRepository, IPrescriptionDtoMapper prescriptionMapper,
-            IMedicineRepository medicineRepository, IMedicineDtoMapper medicineMapper)
+        public PrescriptionManager(IPrescriptionRepository prescriptionRepository,
+            IPrescriptionDtoMapper prescriptionMapper,
+            IMedicineDtoMapper medicineMapper) : base(prescriptionMapper, prescriptionRepository)
         {
             _prescriptionRepository = prescriptionRepository;
-            _prescriptionMapper = prescriptionMapper;
-            _medicineRepository = medicineRepository;
             _medicineMapper = medicineMapper;
         }
 
@@ -37,16 +34,16 @@ namespace Eprescription.Core
 
             return _medicineMapper.Map(medicineEntities);
         }
-        public bool AddNew(PrescriptionDto prescriptonDto)
-        {
-            var entity = _prescriptionMapper.Map(prescriptonDto);
-            return _prescriptionRepository.AddNew(entity);
-        }
+        //public bool AddNew(PrescriptionDto prescriptonDto)
+        //{
+        //    var entity = _prescriptionMapper.Map(prescriptonDto);
+        //    return _prescriptionRepository.AddNew(entity);
+        //}
 
-        public bool Delete(PrescriptionDto prescriptonDto)
-        {
-            var entity = _prescriptionMapper.Map(prescriptonDto);
-            return _prescriptionRepository.Delete(entity);
-        }
+        //public bool Delete(PrescriptionDto prescriptonDto)
+        //{
+        //    var entity = _prescriptionMapper.Map(prescriptonDto);
+        //    return _prescriptionRepository.Delete(entity);
+        //}
     }
 }
