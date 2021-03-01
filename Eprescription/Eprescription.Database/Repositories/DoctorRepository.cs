@@ -13,7 +13,7 @@ namespace Eprescription.Database
         }
         public override IEnumerable<Doctor> GetAll()
         {
-            return DbSet.Include(x=> x.Prescriptions).Select(x => x);
+            return DbSet/*.Include(x=> x.Prescriptions)*/.Select(x => x);
         }
     }
 }

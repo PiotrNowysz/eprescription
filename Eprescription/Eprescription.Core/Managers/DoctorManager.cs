@@ -22,18 +22,19 @@ namespace Eprescription.Core
             _prescriptionMapper = prescriptionMapper;
         }
 
-        public IEnumerable<DoctorDto> GetAllDoctors(string filterString)
+        public IEnumerable<DoctorDto> GetAllDoctors(string filterString = null)
         {
             var doctorEntities = _doctorRepository.GetAll();
 
             if (!string.IsNullOrEmpty(filterString))
             {
-                doctorEntities = doctorEntities.Where(x => x.FirstName.Contains(filterString) || x.LastName.Contains(filterString));
+                doctorEntities = doctorEntities.Where(x => x.FirstName.Contains(filterString) ||
+                x.LastName.Contains(filterString));
             }
             return _doctorMapper.Map(doctorEntities);
         }
 
-        public IEnumerable<PrescriptionDto> GetAllPrescriptonsOfDoctor(int doctorId, string filterString)
+        public IEnumerable<PrescriptionDto> GetAllPrescriptonsOfDoctor(int doctorId, string filterString = null)
         {
             var prescriptionEntities = _prescriptionRepository.GetAll().Where(x => x.DoctorId == doctorId);
 

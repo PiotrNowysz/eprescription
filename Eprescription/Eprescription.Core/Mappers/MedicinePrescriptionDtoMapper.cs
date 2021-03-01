@@ -2,7 +2,8 @@
 
 namespace Eprescription.Core
 {
-    public class MedicinePrescriptionDtoMapper : BaseDtoMapper<MedicinePrescription, MedicinePrescriptionDto>, IMedicinePrescriptionDtoMapper
+    public class MedicinePrescriptionDtoMapper : BaseDtoMapper<MedicinePrescription, 
+        MedicinePrescriptionDto>, IMedicinePrescriptionDtoMapper
     {
     }
 }

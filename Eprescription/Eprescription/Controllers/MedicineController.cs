@@ -1,30 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using Eprescription.Core;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eprescription.Controllers
 {
     public class MedicineController : Controller
     {
-        private int IndexOfDoctor { get; set; }
-        private int IndexOfPrescription { get; set; }
-        public MedicineController()
+        private readonly IMedicineViewModelMapper _medicineViewModelMapper;
+        private readonly IMedicineManager _medicineManager;
+
+
+        public MedicineController(IMedicineViewModelMapper medicineViewModelMapper,
+            IMedicineManager medicineManager)
         {
+            _medicineViewModelMapper = medicineViewModelMapper;
+            _medicineManager = medicineManager;
 
         }
-        public IActionResult Index(int indexOfDoctor, int indexOfPrescription, string filterString)
-        {
-            IndexOfDoctor = indexOfDoctor;
-            IndexOfPrescription = indexOfPrescription;
-            if (string.IsNullOrEmpty(filterString))
-            {
-                return View(TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.ElementAt(indexOfPrescription));
-            }
 
-            return View(new PrescriptionViewModel
-            {
-                Name = TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.ElementAt(indexOfPrescription).Name,
-                Medicines = TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.ElementAt(indexOfPrescription).Medicines.Where(x => x.Name.Contains(filterString)).ToList()
-            });
+        public IActionResult Index(string filterString = null)
+        {
+            var medicineDtos = _medicineManager.GetAllMedicines(filterString);
+
+            var medicineViewModels = _medicineViewModelMapper.Map(medicineDtos);
+
+            return View(medicineViewModels);
         }
         public IActionResult Add()
         {
@@ -32,16 +31,16 @@ namespace Eprescription.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(MedicineViewModel medicineVm)
+        public IActionResult Add(MedicineViewModel medicineViewModel)
         {
-            TestDatabase.Doctors.ElementAt(IndexOfDoctor)
-                .Prescriptions.ElementAt(IndexOfPrescription)
-                .Medicines.Add(medicineVm);
+            var medicineDto = _medicineViewModelMapper.Map(medicineViewModel);
+            _medicineManager.AddNew(medicineDto);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int indexOfMedicine)
+        public IActionResult Delete(int medicineId)
         {
+            _medicineManager.Delete(new MedicineDto { Id = medicineId });
             return View();
         }
     }

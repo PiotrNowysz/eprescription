@@ -6,6 +6,6 @@ namespace Eprescription.Core
 {
     public interface IMedicineManager : IBaseManager<MedicineDto>
     {
-
+        IEnumerable<MedicineDto> GetAllMedicines(string filterString = null);
     }
 }

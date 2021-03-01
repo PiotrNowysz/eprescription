@@ -8,7 +8,7 @@ namespace Eprescription.Database
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public bool IsAbleToMakePrescription { get; set; }
+        public bool IsActive { get; set; }
 
         [NotMapped]
         public virtual List<Prescription> Prescriptions { get; set; }

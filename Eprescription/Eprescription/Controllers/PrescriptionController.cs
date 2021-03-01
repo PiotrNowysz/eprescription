@@ -1,29 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Eprescription.Core;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
 namespace Eprescription.Controllers
 {
+
     public class PrescriptionController : Controller
     {
-        private int IndexOfDoctor { get; set; }
-        public PrescriptionController()
-        {
+        private readonly IPrescriptionManager _prescriptionManager;
+        private readonly IPrescriptionViewModelMapper _prescriptionViewModelMapper;
+        private readonly IDoctorManager _doctorManager;
+        private int _doctorId;
 
+        public PrescriptionController(IPrescriptionManager prescriptionManager,
+            IPrescriptionViewModelMapper prescriptionViewModelMapper,
+            IDoctorManager doctorManager)
+        {
+            _prescriptionManager = prescriptionManager;
+            _prescriptionViewModelMapper = prescriptionViewModelMapper;
+            _doctorManager = doctorManager;
         }
-        public IActionResult Index(int indexOfDoctor, string filterString)
-        {
-            IndexOfDoctor = indexOfDoctor;
-            if (string.IsNullOrEmpty(filterString))
-            {
-                return View(TestDatabase.Doctors.ElementAt(indexOfDoctor));
-            }
 
-            return View(new DoctorsViewModel
-            {
-                Name = TestDatabase.Doctors.ElementAt(indexOfDoctor).Name,
-                Prescriptions = TestDatabase.Doctors.ElementAt(indexOfDoctor).Prescriptions.Where(x => x.Name.Contains(filterString)).ToList()
-            });
+        public IActionResult Index(int doctorId, string filterString = null)
+        {
+            _doctorId = doctorId;
+
+            var prescriptionDtos = _doctorManager.GetAllPrescriptonsOfDoctor(doctorId, filterString);
+
+            var prescriptionViewModel = _prescriptionViewModelMapper.Map(prescriptionDtos);
+
+            return View(prescriptionViewModel);
         }
 
         public IActionResult Add()
@@ -32,17 +39,17 @@ namespace Eprescription.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(PrescriptionViewModel prescriptionVm)
+        public IActionResult Add(PrescriptionViewModel prescriptionViewModel)
         {
-            TestDatabase.Doctors.ElementAt(IndexOfDoctor)
-                .Prescriptions.Add(prescriptionVm);
+            var prescriptionDto = _prescriptionViewModelMapper.Map(prescriptionViewModel);
+            _prescriptionManager.AddNew(prescriptionDto);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult View(int indexOfPrescription)
+        public IActionResult View(int prescriptionId)
         {
-            return RedirectToAction("Index", "Medicine", new { indexOfDoctor = IndexOfDoctor, indexOfPrescription = indexOfPrescription });
+            return RedirectToAction("Index", "Medicine", new { doctorId = _doctorId, prescriptionId = prescriptionId });
         }
 
         private int indexof(DoctorsViewModel doctorVM)
@@ -50,9 +57,12 @@ namespace Eprescription.Controllers
             throw new NotImplementedException();
         }
 
-        public IActionResult Delete(int indexOfPrescription)
+        public IActionResult Delete(int prescriptionId)
         {
+            _prescriptionManager.Delete(new PrescriptionDto { Id = prescriptionId });
+
             return View();
         }
     }
+
 }

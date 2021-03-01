@@ -1,4 +1,4 @@
-﻿@model DoctorsViewModel
+﻿@model DoctorViewModel
 @{
     ViewData["Title"] = $"Doctor{Model.Name}";
 }
@@ -30,9 +30,9 @@
                     <th scope="row">@(Model.Prescriptions.IndexOf(prescription)+1)</th>
                     <td>@prescription.Name</td>
                     <td>
-                        <a asp-area="" asp-controller="Prescription" asp-action="View" asp-route-indexOfPrescription="@Model.Prescriptions.IndexOf(prescription)">View</a>
+                        <a asp-area="" asp-controller="Prescription" asp-action="View" asp-route-prescriptionId="@prescription.Id">View</a>
                         |
-                        <a asp-area="" asp-controller="Prescription" asp-action="Delete" asp-route-indexOfPrescription="@Model.Prescriptions.IndexOf(prescription)">Delete</a>
+                        <a asp-area="" asp-controller="Prescription" asp-action="Delete" asp-route-prescriptionId="@prescription.Id">Delete</a>
                     </td>
                 </tr>
             }
