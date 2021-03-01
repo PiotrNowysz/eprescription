@@ -1,7 +1,6 @@
 ﻿using Eprescription.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 
 namespace Eprescription.Controllers
 {
@@ -52,7 +51,7 @@ namespace Eprescription.Controllers
             return RedirectToAction("Index", "Medicine", new { doctorId = _doctorId, prescriptionId = prescriptionId });
         }
 
-        private int indexof(DoctorsViewModel doctorVM)
+        private int indexof(DoctorViewModel doctorVM)
         {
             throw new NotImplementedException();
         }

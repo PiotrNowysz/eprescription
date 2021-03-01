@@ -1,8 +1,13 @@
-﻿@model DoctorViewModel
-@{
-    ViewData["Title"] = "Add Doctor";
+﻿@{
+    ViewData["Title"] = "Add new Doctor";
 }
 <form asp-controller="Home" asp-action="Add">
-    <input type="text" name="Name" />
+    <label>First Name</label>
+    <input type="text" name="FirstName" />
+    <label>Last Name</label>
+    <input type="text" name="LastName" />
+    <label>Phone Number</label>
+    <input type="text" name="PhoneNumber" />
+
     <button type="submit" class="btn btn-success">Add</button>
 </form>

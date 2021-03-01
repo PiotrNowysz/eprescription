@@ -34,7 +34,7 @@
                     <th scope="row">@(Model.Medicines.IndexOf(medicine)+1)</th>
                     <td>@medicine.Name</td>
                     <td>
-                        <a asp-area="" asp-controller="Medicine" asp-action="View" asp-route-medicineId="@medicine.Id">Delete</a>
+                        <a asp-area="" asp-controller="Medicine" asp-action="View" asp-route-indexOfMedicine="@Model.Medicines.IndexOf(medicine)">Delete</a>
                     </td>
                 </tr>
             }
