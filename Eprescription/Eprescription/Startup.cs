@@ -33,13 +33,16 @@ namespace Eprescription
             services.AddTransient<IDoctorDtoMapper, DoctorDtoMapper>();
             services.AddTransient<IMedicineDtoMapper, MedicineDtoMapper>();
             services.AddTransient<IPrescriptionDtoMapper, PrescriptionDtoMapper>();
-            services.AddTransient<IMedicinePrescriptionMapper, MedicinePrescriptionMapper>();
+            services.AddTransient<IMedicinePrescriptionDtoMapper, MedicinePrescriptionDtoMapper>();
 
             services.AddTransient<IDoctorManager, DoctorManager>();
             services.AddTransient<IPrescriptionManager, PrescriptionManager>();
             services.AddTransient<IMedicineManager, MedicineManager>();
 
-
+            services.AddTransient<IDoctorViewModelMapper, DoctorViewModelMapper>();
+            services.AddTransient<IMedicineViewModelMapper, MedicineViewModelMapper>();
+            services.AddTransient<IPrescriptionViewModelMapper, PrescriptionViewModelMapper>();
+            services.AddTransient<IMedicinePrescriptionViewModelMapper, MedicinePrescriptionViewModelMapper>();
 
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Eprescription.Core
 {
-    public interface IMedicinePrescriptionMapper : IBaseDtoMapper<MedicinePrescription, MedicinePrescriptionDto>
+    public interface IMedicinePrescriptionDtoMapper : IBaseDtoMapper<MedicinePrescription, MedicinePrescriptionDto>
     {
     }
 }
